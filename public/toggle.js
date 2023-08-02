@@ -83,25 +83,27 @@ let toggle = document.querySelector("#header .toggle-button");
     ]
   });
 
+// JavaScript code
 // Get references to the elements in the HTML
 const numberDisplay = document.getElementById('numberDisplay');
 const incrementButton = document.getElementById('incrementButton');
 const decrementButton = document.getElementById('decrementButton');
+const quantityInput = document.getElementById('quantity'); // Retrieve the hidden input element
 
 // Initialize the counter variable
-let counter = 1; // Set the minimum value to 1
+let counter = parseInt(quantityInput.value); // Set the minimum value to the value of the hidden input
 
-// Function to update the display
+// Function to update the display and hidden input value
 function updateDisplay() {
   numberDisplay.textContent = counter;
+  quantityInput.value = counter; // Update the value of the hidden input
 }
 
 // Add a click event listener to the increment button
 incrementButton.addEventListener('click', () => {
   // Increment the counter by 1
   counter++;
-
-  // Update the display
+  // Update the display and hidden input value
   updateDisplay();
 });
 
@@ -112,7 +114,7 @@ decrementButton.addEventListener('click', () => {
     counter--;
   }
 
-  // Update the display
+  // Update the display and hidden input value
   updateDisplay();
 });
 

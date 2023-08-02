@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Blog;
+use App\Models\Cart;
 use App\Models\Post;
+use App\Models\Likes;
 use App\Models\Rating;
 use Illuminate\Http\Request;
-use App\Models\Blog;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -44,12 +49,14 @@ class PostController extends Controller
         $blog->appends($queryParameters);
 
         $totalPosts = Post::count();
+        $totalcart = Cart::count();
 
         return view('posts.index', [
             'posts' => $posts,
             'totalPosts' => $totalPosts,
+            'totalcart' => $totalcart,
             'blog' => $blog,
-            'random' => rand(0,7)
+            'random' => 0
         ]);
     }
 
@@ -57,9 +64,17 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $averageRating = $post->ratings()->avg('rating');
+
+        $user = Auth::user();
+        $existingLike = Likes::where('user_id', $user->id)
+            ->where('post_id', $post->id)
+            ->first();
+
         return view('posts.show', [
             'post' => $post,
             'averageRating' => $averageRating,
+            'random' => rand(0, 7),
+            'existingLike' => $existingLike
         ]);
     }
 
@@ -98,5 +113,43 @@ class PostController extends Controller
         $post->ratings()->save($rating);
 
         return redirect()->back()->with('success', 'Rating submitted successfully.');
+    }
+
+    public function likes(Request $request, $id)
+    {
+        try {
+            $user = $request->user();
+
+            // Check if the user has already liked the post
+            $existingLike = Likes::where('user_id', $user->id)
+                ->where('post_id', $id)
+                ->first();
+
+            if ($existingLike) {
+                // If the user has already liked the post, delete the like record
+                $existingLike->delete();
+
+                // Return a JSON response indicating that the post is unliked
+                return response()->json(['likes' => 0, 'message' => 'Post unliked successfully.']);
+            }
+
+            // If the user has not liked the post, create a new like record
+            $attributes = [
+                'post_id' => $id,
+                'user_id' => $user->id,
+                'likes' => 1,
+            ];
+
+            Likes::create($attributes);
+
+            // Return a JSON response with the updated likes count and success message
+            return response()->json(['likes' => 1, 'message' => 'Post liked successfully.']);
+        } catch (\Exception $e) {
+            // Log the error for debugging purposes
+            Log::error('Likes method error: ' . $e->getMessage());
+
+            // Return a JSON response with an error message
+            return response()->json(['error' => 'An error occurred while processing the request.'], 500);
+        }
     }
 }

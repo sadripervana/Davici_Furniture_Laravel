@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class VariableController extends Controller
 {
     // Other methods...
-
+    
     public function getRandom()
     {
         $random = rand(0,7);
@@ -16,6 +16,7 @@ class VariableController extends Controller
             ->filter(request(['search', 'category', 'author']))
             ->paginate(8)
             ->withQueryString();
+
         return response()->json(
             ['random' => $random,
             'post'=>$post]
