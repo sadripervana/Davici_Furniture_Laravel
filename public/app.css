@@ -1,0 +1,657 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Poppins&family=Roboto&display=swap');
+
+/* Apply smooth scrolling to all scrollable elements */
+html, body {
+    scroll-behavior: smooth;
+}
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-bar{
+    background-color: #ecebf5;
+}
+
+.search-form-btn{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 5px;
+}
+
+.search-form{
+    background-color: white;
+}
+ul{
+    margin-bottom: 0px !important;
+}
+a{
+    text-decoration: none !important;
+
+    color: black ;
+}
+
+
+
+.nav-bar ul li a  {
+    margin: 10px auto;
+    padding: auto;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.nav-bar ul li a:hover{
+    color: #f27009;
+}
+
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+}
+
+.carousel-text {
+  flex: 0 0 40%;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.davici-furniture-txt{
+    border-left: 2px solid black;
+    padding: 10px;
+}
+
+.new-arrivals-txt{
+    border-bottom: 1px solid #000;
+}
+
+.info-davinci{
+    top: 100px;
+    left: 200px;
+    background: rgba(255, 255, 255, 0.383);
+}
+
+.shop-now-btn{
+    background: #f27009;
+}
+
+footer a{
+    color: gray!important;
+}
+
+footer span{
+    font-weight: bold;
+    color: #000!important;
+    border-bottom: 1px solid black;
+}
+.underfooter a{
+    color: gray!important;
+}
+
+.underfooter li{
+    font-weight: bold;
+    color: #000!important;
+}
+
+.left-side img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    padding: 10px;
+}
+
+.left-side {
+    
+    width: 400px;
+    border-right:1px solid grey;
+}
+
+.subscribe-btn {
+    padding: 25px 35px;
+    background: #000;
+    color: white;
+    font-weight: bold;
+}
+
+.subscribe-input{
+    border:1px solid grey;
+    padding:25px 35px;
+    width: 500px;
+}
+
+.subscribe-text-grey{
+    color: grey;
+}
+
+/* ------- Navigation Menu ---------- */
+.navbar{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.nav-brand{
+    font-family: 'DM Sans', sans-serif;
+    font-weight: bold;
+    align-self: center;
+    font-size: 32px;
+}
+
+.collapse1{
+    align-self: center;
+}
+
+.nav-link{
+    font-size: 18px;
+    margin: 12px;
+    color: var(--dark);
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-link:hover{
+    color: var(--primary-color);
+}
+
+.search-box{
+    display: inline;
+    border-right: 1px solid var(--secondary);
+    padding-right: 12px;
+    margin-right: 10px;
+}
+
+.toggle-button{
+    font-size: 21px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 0;
+    margin: 8px 10px;
+    display: none;
+}
+
+.toggle-button:focus{
+    outline: none;
+}
+
+.text-grey{
+    color:grey;
+}
+
+.shop-by-cat{
+    display:inline-flex;
+}
+.shop-by-cat-details{
+    width: 380px;
+    /* float: left; */
+}
+.slider{
+    width:1300px !important;
+}
+
+.category-name{
+    bottom: 20px;
+    left: 20px;
+    color: white !important;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.436);
+    padding:10px 15px;
+}
+
+.category-posts{
+    width:250px !important;
+    height:250px;
+}
+.category-image{
+    width: 250px;
+    height: 250px;
+}
+
+.all-categories{
+    margin-bottom: 1px solid black;
+}
+
+.living-room img{
+    width: 900px;
+    height: 600px;
+}
+.dining-room img{
+    width: 900px;
+    height: 600px;
+}
+
+.inside-living, .inside-dining{
+    border:1px solid white;
+    padding:150px 230px;
+    color: white;
+    top:50px;
+    left:50px;
+    text-align: center;
+}
+.inside-living h3, .inside-dining h3{
+    color:white;
+    background-color: rgba(0, 0, 0, 0.436);
+    padding:10px 15px;
+}
+
+.inside-living h1, .inside-dining h1{
+    font-weight: bold;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.436);
+    padding:10px 10px;
+    /* font-size: 72px; */
+}
+.inside-living button, .inside-dining button {
+    background: #f27009;
+    padding: 10px 15px;
+    border-radius: 20px;
+    
+}
+
+.all-product-btn{
+    border:1px solid black;
+    background: white;
+}
+
+.active-link{
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    color: black;
+}
+
+.passive-link{
+    color:rgb(145, 139, 139);
+}
+
+.text-black-imp{
+    color: black !important;
+}
+
+.card-title{
+    color: black !important;
+}
+.card-text{
+    color: black !important;
+}
+
+
+.beautiful-button {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to bottom, #1b1c3f, #f27009);
+ /* Gradient background */
+  color: white;
+ /* White text color */
+  font-family: "Segoe UI", sans-serif;
+ /* Stylish and legible font */
+  font-weight: bold;
+  font-size: 14px;
+ /* Large font size */
+  border: none;
+ /* No border */
+  border-radius: 30px;
+ /* Rounded corners */
+  padding: 14px 28px;
+ /* Large padding */
+  cursor: pointer;
+ /* Cursor on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+ /* Subtle shadow */
+  animation: button-shimmer 2s infinite;
+  transition: all 0.3s ease-in-out;
+ /* Smooth transition */
+}
+
+/* Hover animation */
+.beautiful-button:hover {
+  background: linear-gradient(to bottom, #2c2f63, #5b67b7);
+  animation: button-particles 1s ease-in-out infinite;
+  transform: translateY(-2px);
+}
+
+/* Click animation */
+.beautiful-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.rating{
+    display: flex;
+    flex-direction: column;
+}
+
+.rating form{
+    width:180px;
+}
+
+.good-vibes img{
+    width: 100%;
+}
+
+.price-text{
+    color: #f27009;
+}
+
+.color-options {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.size-options {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  align-items: center;
+}
+
+.size-option{
+    padding: 15px;
+    border:1px solid black;
+}
+.add-to-cart{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.heart,.shuffle {
+    padding: 13px;
+    border: 1px solid black;
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.add-to-cart-btn{
+    background: #000;
+    color:white;
+    padding: 10px 20px;
+    display: flex;
+    width: 180px; 
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.quantity{
+    display: flex;
+    margin-right: 5px;
+}
+
+.number,.plus,.minus{
+    font-size: 11px;
+    padding: 2px 10px;
+    border: 1px solid black;
+}
+
+
+.number{
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    padding-top: 10px;
+}
+.we-design-text{
+    top: calc(50% - 32px);
+    left: 20px;
+    color: white;
+    background: #00000054;
+    padding: 10px 20px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+.cards .shipping, .cards .security, .cards .return, .cards .fabric{
+    border: 1px solid black;
+    padding: 40px 70px;
+    text-align: center;
+    justify-content: center;
+}
+
+.cards .shipping  svg, .cards .security svg, .cards .return svg, .cards .fabric svg{
+    margin: 0 auto;
+    width: 70px; /* Set the desired width */
+  height: 70px; /* Set the desired height */
+}
+
+.cards h6{
+    color: grey;
+}
+
+.read-more{
+    border-bottom: 1px solid black;
+    font-weight: bold;
+    color: black;
+    width: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-color{
+    color: #f27009;
+}
+
+.image-date{
+    top: 5px;
+    left: 5px;
+    background: white;
+    padding: 15px;
+}
+.day{
+    border-bottom: 1px solid black;
+}
+
+.blog-title{
+    font-weight: bold;
+}
+
+.blog-author{
+    border-right:1px solid black;
+    display:inline;
+    padding-right:10px;
+    color: grey;
+}
+
+.blog-comments{
+    padding-left:10px;
+    color: grey;
+}
+.blog-author-span{
+    font-weight: bold;
+    color: black;
+}
+
+.blog-body{
+    color: grey;
+}
+
+.blog-image{
+    max-height: 280px;
+}
+.blog{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* margin-bottom: 30px !important; */
+}
+
+.slick-slide {
+    margin: 40px;
+}
+
+.blog-desc{
+    color: grey;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.blog-posts,.posts-category{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#red{
+    background: red;
+    color: white;
+}
+
+#blue{
+    background: blue;
+    color: white;
+}
+
+#green{
+    background: green;
+    color: white;
+}
+
+#yellow{
+    background: yellow;
+}
+
+#orange{
+    background: orange;
+}
+
+#purple{
+    background: purple;
+    color: white;
+}
+
+#pink{
+    background: pink;
+}
+
+.aling-center{
+    align-items: center;
+}
+
+/* Shimmer animation */
+@keyframes button-shimmer {
+  0% {
+    background-position: left top;
+  }
+
+  100% {
+    background-position: right bottom;
+  }
+}
+
+/* Particle animation */
+@keyframes button-particles {
+  0% {
+    background-position: left top;
+  }
+
+  100% {
+    background-position: right bottom;
+  }
+}
+
+/* ------- .Navigation Menu ---------- */
+
+@media (max-width : 992px){
+    .navbar{
+        flex-direction: column;
+    }
+
+    .rooms{
+        flex-wrap: wrap;
+    }
+
+    .inside-living,.inside-dining{
+        top:10px;
+        left:10px;
+        padding:100px;
+        border:none;
+    }
+
+}
+
+@media (max-width : 768px){
+    .rooms{
+        flex-wrap: wrap;
+    }
+
+    .inside-living,.inside-dining{
+        top:10px;
+        left:10px;
+        padding:100px;
+        border:none;
+    }
+}
+
+@media (max-width : 574px){
+    .toggle-button{
+        display: initial;
+    }
+    
+    #search-container.expanded {
+        height: 300px;
+    }
+
+    .info-davinci{
+        display: none;
+    }
+
+    .collapse1{
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.8s cubic-bezier(0.51,-0.15, 0, 0.98);
+    }
+
+    .collapse1 .nav-link{
+        display: block;
+        text-align: center;
+    }
+
+    .search-box{
+        border-right: none;
+    }
+
+    .collapse1-toggle{
+        max-height: 500px;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rooms{
+        flex-wrap: wrap;
+    }
+
+    .inside-living,.inside-dining{
+        top:10px;
+        left:10px;
+        padding:100px;
+        border:none;
+    }
+
+}
