@@ -86,8 +86,7 @@
             <div class="good-vibes mt-2">
                 <img src="images/good-vibes.jpg" alt="">
             </div>
-
-            <x-add-to-cart :posts="$posts" :random="$random" />
+            <x-add-to-cart :posts="$posts" :random="$random"/>
 
             <div class="we-design mt-20 lg:mt-20 mb-20 ">
                 <div class="we-design-img relative">

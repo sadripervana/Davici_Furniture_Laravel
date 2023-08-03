@@ -67,7 +67,7 @@ class AdminPostController extends Controller
     {
         $post->delete();
 
-        return back()->with('success', 'Post Deleted!');
+        return back()->with('error', 'Post Deleted!');
     }
 
     protected function validatePost(?Post $post = null): array

@@ -9,6 +9,8 @@
     </form>
 </div>
 
+@if($post->averageRating)
+
 <script>
     $(function () {
         var averageRating = {{ $post->averageRating ?? 0 }};
@@ -18,3 +20,4 @@
         });
     });
 </script>
+@endif

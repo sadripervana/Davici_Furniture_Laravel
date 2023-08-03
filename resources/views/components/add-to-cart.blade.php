@@ -1,7 +1,8 @@
-@props(['posts', 'random'])
+@props(['posts', 'random', 'existingLike'])
 
 <div class="add-to-card" id="add-to-card">
     <div class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
+        @isset($posts[$random]) 
         <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
             <div class="col-span-6 lg:text-center lg:pt-14 mb-10">
                 <img src="{{ asset('storage/' . $posts[$random]->thumbnail) }}" alt="" class="rounded-xl">
@@ -16,9 +17,11 @@
                 </div>
 
                 <h1 class="font-bold text-3xl lg:text-4xl mb-10 title-text">
-                    <a href="/posts/{{$posts[$random]->slug}}">
+                    <div class="post-title-link">
+                       <a href="/posts/{{$posts[$random]->slug}}" >
                         {{ $posts[$random]->title }}
                     </a>
+                    </div>
                 </h1>
                 <h4 class="price-text">${{$posts[$random]->price}}</h4>
 
@@ -80,12 +83,37 @@
                             </button>
                         </div>
                     </form>
+                    
+                    <script>
+                        function likes() {
+                            var postId = {{ $posts[$random]->id }}; // Assuming $posts is the current post object in the view
+                            
+                            $.ajax({
+                                url: '{{ route('likes.web', ['id' => '__post_id__']) }}'.replace('__post_id__', postId),
+                                type: 'GET', // Make sure the request method is set to GET
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log(data);
 
-                    <div class="heart">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                        </svg>
-                    </div>
+                                    // Check if the response indicates the post is unliked
+                                    if (data.likes === 0) {
+                                        // Update the heart icon to the empty heart SVG
+                                        $('#heartIcon').html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>');
+                                    } else {
+                                        // Update the heart icon to the filled heart SVG
+                                        $('#heartIcon').html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>');
+                                    }
+                                },
+                                error: function(xhr, textStatus, errorThrown) {
+                                    console.error('Error:', textStatus, errorThrown);
+
+                                    // Additional error information from the xhr object
+                                    console.log('Status Code:', xhr.status);
+                                    console.log('Response Text:', xhr.responseText);
+                                }
+                            });
+                        }
+                    </script>
                     <div class="shuffle" onclick="shuffleRandom()" id="shuffleDiv">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
@@ -197,10 +225,17 @@
                                     const categoryElement = document.querySelector('.category-cart');
 
                                     // Update the title with the new post's title
-                                    titleElement.innerHTML = data.post['data'][random].title;
+                                    titleElement.innerHTML = ''; // Clear the container
+                                    const anchorTag = document.createElement('a');
+                                    anchorTag.href = '/posts/' + data.post['data'][random].slug;
+                                    anchorTag.textContent = data.post['data'][random].title;
+                                    titleElement.appendChild(anchorTag);
+
                                     categoryElement.innerHTML = data.post['data'][random].category.name;
                                     bodyElement.innerHTML = data.post['data'][random].body;
-                                    // Update other elements as needed, e.g., title, price, color, size, etc.
+
+                                    const heartIconPlaceholder = document.getElementById('heartIconPlaceholder');
+
                                 } else {
                                     console.error('Error: The server response does not contain the post data.');
                                 }
@@ -214,5 +249,6 @@
                 </script>
             </div>
         </article>
+        @endisset
     </div>
 </div>

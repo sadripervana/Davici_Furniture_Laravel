@@ -51,12 +51,14 @@ class PostController extends Controller
         $totalPosts = Post::count();
         $totalcart = Cart::count();
 
+        $random = rand(0, 7);
+        
         return view('posts.index', [
             'posts' => $posts,
             'totalPosts' => $totalPosts,
             'totalcart' => $totalcart,
             'blog' => $blog,
-            'random' => 0
+            'random' => $random
         ]);
     }
 
@@ -66,9 +68,13 @@ class PostController extends Controller
         $averageRating = $post->ratings()->avg('rating');
 
         $user = Auth::user();
-        $existingLike = Likes::where('user_id', $user->id)
-            ->where('post_id', $post->id)
-            ->first();
+        $existingLike = null;
+        if($user){
+            $existingLike = Likes::where('user_id', $user->id)
+                ->where('post_id', $post->id)
+                ->first();
+
+        }
 
         return view('posts.show', [
             'post' => $post,

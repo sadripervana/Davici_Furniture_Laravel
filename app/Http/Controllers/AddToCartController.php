@@ -55,6 +55,6 @@ class AddToCartController extends Controller
     {   
         $cart->delete();
 
-        return back()->with('success', 'Product removed from cart!');
+        return back()->with('error', 'Product removed from cart!');
     }
 }
