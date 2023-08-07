@@ -22,12 +22,12 @@ class PostController extends Controller
         if ($hot === 'top') {
             // If hot parameter is 'top', get posts ordered by highest average rating
             $posts = Post::select('posts.*', DB::raw('COALESCE(AVG(ratings.rating), 0) as averageRating'))
-            ->leftJoin('ratings', 'posts.id', '=', 'ratings.post_id')
-            ->groupBy('posts.id')
-            ->orderBy('averageRating', 'desc')
+                ->leftJoin('ratings', 'posts.id', '=', 'ratings.post_id')
+                ->groupBy('posts.id')
+                ->orderBy('averageRating', 'desc')
                 ->paginate(8)
                 ->withQueryString();
-        } elseif($hot == 'best') {
+        } elseif ($hot == 'best') {
             // If hot parameter is 'best', get posts with most sold products
             $posts = Post::select('posts.*')
                 ->orderBy('sold', 'desc')
@@ -40,23 +40,26 @@ class PostController extends Controller
                 ->paginate(8)
                 ->withQueryString();
         }
-        
+
         $blog = Blog::where('status', 1)
-        ->with('comments')
-        ->latest()
-        ->paginate(10);
+            ->with('comments')
+            ->latest()
+            ->paginate(10);
         $queryParameters = $request->query();
         $blog->appends($queryParameters);
 
         $totalPosts = Post::count();
-        $totalcart = Cart::count();
+
+        $totalCart = Cart::where('user_id', auth()->id())->count();
+        $totalLikes = Likes::where('user_id', auth()->id())->count();
 
         $random = rand(0, 7);
-        
+
         return view('posts.index', [
             'posts' => $posts,
             'totalPosts' => $totalPosts,
-            'totalcart' => $totalcart,
+            'totalLikes' => $totalLikes,
+            'totalcart' => $totalCart,
             'blog' => $blog,
             'random' => $random
         ]);
@@ -69,11 +72,10 @@ class PostController extends Controller
 
         $user = Auth::user();
         $existingLike = null;
-        if($user){
+        if ($user) {
             $existingLike = Likes::where('user_id', $user->id)
                 ->where('post_id', $post->id)
                 ->first();
-
         }
 
         return view('posts.show', [
@@ -85,7 +87,7 @@ class PostController extends Controller
     }
 
     public function rate(Request $request, $id)
-    {   
+    {
         // Retrieve the authenticated user
         $user = $request->user();
 

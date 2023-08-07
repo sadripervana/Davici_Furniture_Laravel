@@ -56,6 +56,7 @@
                     </div>
 
                     <div class="add-to-cart my-3">
+                        @auth
                         <div class="quantity">
                             <div id="numberDisplay" class="number">
                                 1
@@ -80,7 +81,6 @@
                             </button>
                         </div>
                     </form>
-                    @auth
                         <div class="heart" onclick="likes()" id="heartIcon">
                             @if(!$existingLike)
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">

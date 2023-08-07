@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\VariableController;
@@ -40,6 +41,9 @@ Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'
 
 Route::get('/guest/blog/create', [GuestBlogController::class, 'create'])->name('guest.blog.create');
 Route::post('/guest/blog', [GuestBlogController::class, 'store'])->name('guest.blog.store')->middleware('auth');
+
+Route::get('/likes', [LikesController::class, 'index'])->name('likes')->middleware('auth');
+Route::delete('/likes/{like}', [LikesController::class, 'destroy'])->name('likes.destroy')->middleware('auth');
 
 Route::get('/cart', [AddToCartController::class, 'index'])->name('cart')->middleware('auth');
 Route::delete('/carts/{cart}', [AddToCartController::class, 'destroy'])->name('carts.destroy')->middleware('auth');

@@ -27,7 +27,13 @@ class AddToCartController extends Controller
             $i++;
         }
 
-        $cartPost = $carts->zip($post);
+        if (isset($post)) {
+
+            $cartPost = $carts->zip($post);
+        } else {
+            $cartPost = [];
+        }
+
 
         return view('cart.show', [
             'carts' => $cartPost,
@@ -52,7 +58,7 @@ class AddToCartController extends Controller
     }
 
     public function destroy(Cart $cart)
-    {   
+    {
         $cart->delete();
 
         return back()->with('error', 'Product removed from cart!');

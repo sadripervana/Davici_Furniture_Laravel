@@ -4,6 +4,7 @@
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        @if(count($carts))
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <th class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">Title</th>
@@ -13,6 +14,7 @@
                                 <th class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">Price</th>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
+                                
                                 @foreach ($carts as $cart)
                                     <tr>
 
@@ -65,26 +67,27 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                
                             </tbody>
                         <tfoot>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-green-500">
-                                ${{$totalPrice}}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="text-green-500 hover:text-blue-600 ">Total</a>
-                            </td>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-green-500" colspan="5">
+                                    ${{$totalPrice}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-green-500">
+                                    Total
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-green-500" colspan="7">
+                                   <a href="#" class="text-green-500 hover:text-blue-600 " onclick="checkout()"> Checkout</a>
+                                </td>
+                            </tr>
                         </tfoot>
                         </table>
+                        @else 
+                        Your Cart is Empty
+                        @endif
                     </div>
                 </div>
             </div>

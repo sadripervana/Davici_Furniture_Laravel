@@ -59,6 +59,7 @@
                     </div>
 
                     <div class="add-to-cart my-3">
+                        @auth
                         <div class="quantity">
                             <div id="numberDisplay" class="number">
                                 1
@@ -82,6 +83,7 @@
                                 ADD TO CART
                             </button>
                         </div>
+                        @endauth
                     </form>
                     
                     <script>
